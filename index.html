@@ -1,0 +1,403 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-store">
+    <meta http-equiv="Cache-control" content="must-revalidate">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <!-- Google Tag Manager -->
+    <script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-X82QM69WT4&amp;l=dataLayer&amp;cx=c"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-ED3REM5Z0D&amp;l=dataLayer&amp;cx=c"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-PB88R9P"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PB88R9P');</script>
+    <!-- End Google Tag Manager -->
+    <link id="preconnect" rel="preconnect" href="https://cdn.fonts.net">
+    <link id="fonts" href="https://cdn.fonts.net/kit/37e45452-6522-41af-9f2d-96b3ddab02b6/37e45452-6522-41af-9f2d-96b3ddab02b6.css" rel="stylesheet">
+    <link id="hamburgerCSS" href="dist/hamburgers.css" rel="stylesheet">
+    <link id="styles" rel="stylesheet" href="css/style.min.css">
+    <title>The Book of Blossom</title>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PB88R9P"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <script>
+    document.addEventListener("DOMContentLoaded", startLoadScreen);
+    function startLoadScreen(){
+    	let pgImages = document.querySelectorAll(".title");
+      let allImages = [...pgImages].map((img) => img.src);
+      let audios = document.querySelectorAll(".audio");
+      let allAudio = [...audios].map((audio) => audio.href);
+      const fulljs = document.getElementById("fulljs").src;
+    	const hamburgerCSS = document.getElementById("hamburgerCSS").href;
+    	const styles = document.getElementById("styles").href;
+
+      let externals = [
+        hamburgerCSS,
+        fulljs,
+        styles,
+        'images/bg/dedications_bkgd.jpg',
+        'images/bg/home_bkgd_vert.jpg',
+        'images/bg/home_bkgd_horizon.jpg',
+        'images/bg/lonely_bkgd.jpg',
+        'images/bg/sky.jpg',
+        'images/bg/NeverKnew_bkgd.jpg',
+        'images/bg/shutterstock_568583797.jpg',
+        'images/bg/numeronefan.jpg',
+        'images/flowers/flower1.png',
+        'images/flowers/flower2.png',
+        'images/flowers/flower3.png'
+      ];
+    	let percent_complete = 0;
+    	let load = 0;
+    	let toLoad = allImages.concat(externals);
+    	let request = new XMLHttpRequest();
+    	const event = new Event('launchInit');
+
+    	request.addEventListener('readystatechange', function(e) {
+    		scroll(0,0);
+    		if(request.readyState == 2 && request.status == 200) {
+    		// Download is being started
+    		}else if(request.readyState == 3) {
+    			// Download is under progress
+    		}else if(request.readyState == 4) {
+    			let pc = 100 / toLoad.length;
+    			percent_complete += pc;
+    			let prog = document.getElementById("progress");
+    			prog.style.width = percent_complete+"%";
+    			load++;
+    			if(load != toLoad.length){
+    				request.open("GET", toLoad[load], true);
+    				request.responseType = 'arraybuffer';
+    				request.send();
+    			}else{
+    				setTimeout(function(){
+    					document.querySelector('.page-load').style.opacity = 0;
+    					document.dispatchEvent(event);
+              jumpToPlace();
+    				}, 750);
+    				setTimeout(function(){
+    					document.querySelector('.page-load').style.display = 'none';
+    				}, 950);
+    			}
+    		}
+    	});
+
+      Element.prototype.documentOffsetTop = function () {
+          return this.offsetTop + ( this.offsetParent ? this.offsetParent.documentOffsetTop() : 0 );
+      };
+
+      function jumpToPlace(){
+        let curURL = window.location.href;
+        let top;
+        if(curURL.includes("#")){
+          let piece = curURL.split("#");
+          let breakAgain = piece[1].split("?");
+          let toHighlight = '';
+          let onlyJump = '';
+          if(breakAgain.length > 1 && breakAgain[1] != ''){
+            toHighlight = breakAgain[1];
+            onlyJump = breakAgain[0];
+          }else{
+            onlyJump = piece[1];
+          }
+          if(toHighlight != ''){
+            if(document.querySelector('#'+toHighlight+' .flower-img') == null && document.querySelector('#'+toHighlight+' img') == null){
+              top = document.querySelector('#'+onlyJump).documentOffsetTop();
+              window.scrollTo( 0, top );
+              return;
+            }
+            if(document.querySelector('#'+toHighlight+' .flower-img') != null){
+              top = document.querySelector('#'+toHighlight+' .flower-img').documentOffsetTop() - ( window.innerHeight / 2 ) + (document.querySelector('#'+toHighlight+' .flower-img').offsetHeight/2)
+            }else{
+              top = document.querySelector('#'+toHighlight+' img').documentOffsetTop() - ( window.innerHeight / 2 ) + (document.querySelector('#'+toHighlight+' img').offsetHeight*4)
+            }
+            window.scrollTo( 0, top );
+            let high = document.querySelectorAll(".highlighted");
+            if(high.length > 0){
+              [...high].foreach(link => link.classList.remove('highlighted'));
+            }
+            if(document.querySelector('#'+toHighlight+' .flower-img') != null){
+              document.querySelector('#'+toHighlight+' .flower-img').classList.add('highlighted');
+            }else{
+              document.querySelector('#'+toHighlight+' img:not(.play-btn)').classList.add('highlighted');
+            }
+          }else{
+            top = document.querySelector('#'+onlyJump).documentOffsetTop();
+            window.scrollTo( 0, top );
+          }
+
+          setTimeout(function(){
+            if(toHighlight != ''){
+              let transformStyle = document.querySelector('#'+toHighlight).style.transform;
+              if(transformStyle == ''){
+                let whereLaxed = document.querySelector('#'+toHighlight).closest('.parallaxing');
+                transformStyle = whereLaxed.style.transform;
+                let numbs = transformStyle.split(',');
+                let trans = numbs[1].split('px')[0];
+                window.scrollBy(0, parseFloat(trans));
+              }else{
+                let numbs = transformStyle.split(',');
+                let trans = numbs[1].split('px')[0];
+                window.scrollBy(0, parseFloat(trans));
+              }
+            }
+          }, 700);
+        }
+      }
+
+    	request.open("GET", toLoad[load], true);
+    	request.responseType = 'arraybuffer';
+    	request.send();
+    };
+    </script>
+    <div class="page-load" style="width: 100vw; height: 100vh; background-color: rgb(3, 59, 0); display: none; position: fixed; z-index: 2200; place-content: center; flex-direction: column; transition: opacity 0.5s ease 0s; opacity: 0;">
+    	<div id="progress" style="height: 10px; background-color: rgb(180, 0, 255); position: fixed; width: 100%; top: 0px; transition: all 0.3s ease 0s;"></div>
+    	<div class="" style="color:#ffa200;font-family:Arial, Helvetica, sans-serif;text-align:center">ZACH HOOD</div>
+    </div>
+    <nav style="height: 839px;">
+      <img class="tableofcontents logo" src="images/nav/TableOfContents.svg" alt="Table of contents">
+      <ul>
+        <li><a class="main-menu" href="#i-aint-rich-girl">i ain't rich, girl</a></li>
+        <li><a class="main-menu" href="#lonely-isnt-the-word-for-this">lonely isn't the world for this</a></li>
+        <li><a class="main-menu" href="#when-she-was-mine">when she was mine</a></li>
+        <li><a class="main-menu" href="#never-knew-a-heart-could-break-itself">never knew a heart could break itself</a></li>
+        <li><a class="main-menu" href="#daphne">daphne</a></li>
+        <li><a class="main-menu" href="#number-one-fan">number one fan</a></li>
+      </ul>
+      <div class="flower floating"><img src="images/nav/flower1.png" alt="flower"></div>
+      <div class="nav-bottom">
+        <div class="nav-bottom-icons">
+          <div class="left"><img class="logo" src="images/nav/Arista_logo_white.svg" alt="Arista logo"></div>
+          <div class="right">
+            <a target="_blank" href="https://www.instagram.com/zachary.hood/?hl=en"><img class="logo" src="images/nav/instagram.svg" alt="instagram"></a>
+            <a target="_blank" href="https://www.facebook.com/ZacharyHoodMusic/"><img class="logo" src="images/nav/facebook.svg" alt="facebook"></a>
+          </div>
+        </div>
+        <nav class="small">
+          <a target="_blank " href="https://www.sonymusic.com/feedback/">Send Us Feedback</a> |
+          <a target="_blank " href="https://www.sonymusic.com/privacy-policy/">Privacy Policy</a> | <a target="_blank" href="https://www.sonymusic.com/privacy-policy/#your-california-privacy-rights">Your California Privacy Rights</a> |
+          <a target="_blank " href="https://www.sonymusic.com/terms-and-conditions/">Terms And Conditions</a> |
+          <a target="_blank " href="https://www.sonymusic.com/how-we-use-your-data/">How We Use Your Data</a> |
+          <a target="_blank " href="https://www.sonymusic.com/ccpa-contact-form/">Do Not Sell My Information</a>
+        </nav>
+        <small>
+          © 2022 Sony Music Entertainment. All rights reserved.
+        </small>
+      </div>
+    </nav>
+
+    <header>
+    <a class="play-icon-link" target="_blank" href="https://fanlink.to/BlossomEPPresave"><img class="menu-play-icon" src="images/nav/play_icon_for_link.svg" alt="twitter"></a>
+      <div class="mobile-button">
+        <img class="burger" src="images/nav/BurgerNav.svg" alt="menu button">
+        <img class="x" src="images/nav/ExitNav.svg" alt="close menu">
+      </div>
+      <button class="hamburger--spin" aria-label="main menu" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </header>
+
+    <section id="opening" style="height: 839px; background-size: 100%;">
+      <div class="arial-black parallaxing" data-depth=".5">the book of</div>
+      <img class="blossom parallaxing" data-depth=".4" src="images/titles/blossom.png" alt="the book of blossom">
+    </section>
+    <section id="dedications" style="margin-top: 839px; height: 410px;">
+      <div class="overbg">
+        <img class="title" src="images/titles/Dedications.svg" alt="dedications">
+        <p>Here it is… my first EP. If I told my 8 year-old self where we’re at with “this whole singing thing,” he would freak out. What was once a dream is now slowly – but surely – turning into a reality. This collection of songs is very important to me. I’ve been living away from family and everything I know for the last two years. I’m still figuring out life and trying to adapt, become successful for myself but really for my family. These songs come from the most vulnerable place my 21 year-old mind can imagine. I CANNOT wait for you guys to listen to it. I want to thank everyone that has had their part in this project. My mom, my brother TJ, my amazing family back home, my insanely talented managers Jonny and – the calm behind his crazy – Michael, and to all of the producers and writers that made this happen. I want to thank you guys for helping me bring life to this EP and giving it what it deserves. I could harp on why I’ll adore you guys FOREVER. I hope you guys enjoy my first EP. THIS IS BLOSSOM.
+        </p>
+      </div>
+      <div class="bgmove">
+        <img class="bgmoveimage parallaxing" data-depth=".8" src="images/bg/dedications_bkgd.jpg" alt="">
+      </div>
+    </section>
+
+    <section id="i-aint-rich-girl" class="no-padding-top">
+      <div class="content">
+        <div class="play-btn-over-img">
+          <a id="official-video-iarg" target="_blank" class="parallaxing" data-depth=".5" href="https://zachhood.lnk.to/RichGirlVideo">
+            <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+            <img class="rotate-15" data-size="1500/844" src="images/iarg/rich-girl-VSC4_16_9.jpg" alt="Zach Hood facing forward" style="height: 622.309px; width: 1106px;">
+          </a>
+        </div>
+        <img class="title parallaxing" data-depth=".3" src="images/titles/IaintRichGirl.svg" alt="I ain't rich girl">
+        <p class="parallaxing" data-depth=".4">The story here is honestly quite wild. My manager, Jonny, had always wanted to flip a classic song, and came to me with the idea to re-make “Rich Girl” by Hall &amp; Oates, a modern version that leans a bit more wholesome. We got basically everyone on board before our version even existed, then went into the studio with rockstar producer, Andrew Goldstein, and came out with what we believed to be a song with true hit potential. We were ready to go, and then in the clearance process Daryl Hall himself ended up saying no. We were devastated, and everyone pretty much told us to move on. We wouldn’t let it die, though. We pushed and pushed and finally got Daryl’s management to agree to forward “a pitch.” Still, we were told it was highly unlikely to be overturned. We literally wrote page-long letters to Daryl Hall explaining why this was so important to us. Miraculously, we got a message back saying our version was approved to be released, and that our words “spoke to” Daryl.
+        <br><br>
+        These were our words:</p>
+        <div class="flower-holder parallaxing" data-depth=".38" style="height: 875px;">
+          <div class="audio-flower-1">
+            <a id="zach-letter" class="audio" alt="Zach's letter audio" href="media/Zach_s_letter.mp3">
+              <img class="audio-wave" src="images/nav/audiowave_icon.svg" alt="audio wave">
+              <img class="flower-img" src="images/flowers/flower3.png" alt="yellow flower">
+              <div class="words">Zach’s letter</div>
+            </a>
+          </div>
+          <div class="audio-flower-2" style="top: 291.333px;">
+            <a id="jonny-letter" class="audio" alt="Jonny's letter audio" href="media/Jonny_s_letter.mp3">
+              <img class="audio-wave" src="images/nav/audiowave_icon.svg" alt="audio wave">
+              <img class="flower-img" src="images/flowers/flower2.png" alt="yellow flower">
+              <div class="words">Jonny’s letter</div>
+            </a>
+          </div>
+        </div>
+        <img class="rotate15 parallaxing" data-depth="0.37" data-size="275/275" src="images/iarg/ZachHood_RichGirl_cover.jpg" alt="Zach Hood cover" style="height: 769.148px;">
+        <p class="parallaxing" data-depth="0.38">“‘i ain’t rich, girl’ was originally going to be a single, but then got moved to the EP focus-track, so this artwork didn’t see the light of day. Until now…”</p>
+        <div class="play-btn-over-img">
+          <a id="performance-video" class="parallaxing" data-depth="0.36" target="_blank" href="https://zachhood.lnk.to/RichGirlPerformanceVideo">
+            <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+            <img class="rotate-5" data-size="275/154" src="images/iarg/RichGirl-perf.jpg" alt="Zach Hood singing on a mic" style="height: 619.36px; width: 1106px;">
+          </a>
+        </div>
+      </div>
+      <div class="bg"></div>
+    </section>
+
+    <section id="lonely-isnt-the-word-for-this">
+      <div class="content">
+        <img class="centered-title parallaxing" data-depth=".3" src="images/titles/lonelyisnttheword.svg" alt="lonely isn't the word for this">
+        <p>In terms of music videos, this is definitely one of my favorites I’ve done since I became an artist. I love how it perfectly shows the beginning, middle and end of a relationship essentially at the same time. The moods change almost instantly in the same setting, and it does a really good job of showing how people can become attached sentimentally to places based on prior experiences there.</p>
+        <div class="play-btn-over-img parallaxing" data-depth=".28">
+          <a target="_blank" id="official-video-litwoft" alt="lonely isn't the word for this official video" href="https://www.youtube.com/watch?v=-ByxZgoZj9M&amp;ab_channel=ZachHoodVEVO">
+            <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+            <img class="rotate15" data-size="275/155" src="images/litwft/lonely_VSC1_16_9.jpg" alt="Zach in restaurant play video" style="height: 623.382px; width: 1106px;">
+          </a>
+        </div>
+        <img class="rotate-15 parallaxing" data-depth=".32" data-size="275/275" src="images/litwft/ZachHood_LONELY_cover_rev.jpg" alt="lonely isn't the word for this cover" style="height: 769.148px;">
+        <div class="flower-holder-b parallaxing" data-depth=".25" style="height: 811px;">
+          <div class="audio-flower-1">
+            <a id="writing-verses" target="_blank" href="zac-jonny-verses-video.html">
+              <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+              <img class="flower-img" src="images/flowers/flower1.png" alt="flower">
+              <div class="words">Zach and Jonny<br>writing the verses</div>
+            </a>
+          </div>
+          <div class="audio-flower-2" style="top: 304px;">
+            <a id="bts" target="_blank" alt="lonely isn't a word for this behind the scenes video" href="https://www.youtube.com/watch?v=osLP8Zpbg_Q&amp;t=132s&amp;ab_channel=ZachHood">
+              <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+              <img class="flower-img" src="images/flowers/flower2.png" alt="flower">
+              <div class="words">Behind the<br>scenes in NYC</div>
+            </a>
+          </div>
+        </div>
+        <img class="parallaxing" data-depth=".2" src="images/litwft/Lonely_Polaroid.png" data-size="704/772" alt="Polaroid of Zach and Jayden Seeley" style="height: 1106px; width: 1008.58px;">
+        <p class="parallaxing" data-depth=".18">There’s a really cool story behind the writing of this one, too. I started the song with Jayden Seeley – he’s a wizard in the studio. We were just freestyling to a beat he made and the chorus came together in a couple minutes. For the verses, another day Jonny and I were hanging out with our roommate, Alexis – who doesn’t work in music. She was telling us a story about the “first boy she kissed in California.” That phrase stood out to Jonny, randomly, so he ran and grabbed his guitar and played some chords singing “she was the first girl I kissed out in California.” We then dove in fully and finished the song from there – with Alexis’ help – so she actually got a writing credit on it. She’s been super supportive of my LA journey since she met me before any of the music had even come out, and is kinda like a sister to me. It’s cool she had a role in this one coming together. We then met up with this dope producer, Benzi in NYC while on tour who helped finish up the production w/ Jayden. My band even helped with some vocals. This was a TEAM effort all around.</p>
+        <img class="rotate-15 parallaxing" data-depth=".18" data-size="275/176" src="images/litwft/FullSizeRender-preview.jpg" alt="Zach and friends" style="height: 707.84px; width: 1106px;">
+      </div>
+    <div class="bg"></div>
+    </section>
+
+    <section id="when-she-was-mine">
+      <div class="content">
+        <img class="title parallaxing" data-depth=".4" src="images/titles/whenshewasmine.svg" alt="when she was mine">
+        <p class="parallaxing" data-depth=".32">“when she was mine” is about a relationship that seemed like it was going super well, but eventually it fizzled because of distance and life getting in the way. You had made all these promises and visions of your dream life together, but it never ended up getting to that point. Now, you see she’s moved on and has those things you wanted to give her, only with someone else. It’s too late to live that dream life with her.</p>
+        <img class="rotate-5 parallaxing" data-depth=".25" data-size="275/275" src="images/wswm/WSWM_cmyk.jpg" alt="when she was mine album cover" style="height: 769.148px;">
+        <p class="parallaxing" data-depth=".18">It’s also worth noting that this song is NOT directly about my GF haha. The elements about the life described were based on dreams we’ve discussed together, but the rest of it is a story that was more or less describing a reality that I don’t want to come true!</p>
+        <img class="rotate15 girlfriend-pic parallaxing" data-depth=".1" data-size="175/263" src="images/wswm/IMG_8038.jpg" alt="Zach Hood and girlfriend" style="height: 1106px; width: 735.932px;">
+        <img class="rotate-15 parallaxing" data-depth=".05" data-size="275/155" src="images/wswm/WSWM-VSC.jpg" alt="Zach playing guitar" style="height: 623.382px; width: 1106px;">
+        <p class="parallaxing" data-depth="0">This song also means something more to me because it was an idea
+        I had for a while. It was definitely a work in progress and took me a while to get it where I wanted it to go before actually going into a session with the concept and turning it into a full song, but I knew all along it could be special. For whatever reason, people around me weren’t initially as excited about the idea as I was. But I stuck to my guns and in the end, not only did people come around, but the song became one of my more successful releases in its first couple of weeks. It’s a lesson on believing in yourself and also being patient, because I had to really fine tune this one to get the lyrics exactly where I wanted them. It also has a little country to it in the lyrics and melody, even the way I deliver it. Being from Alabama, that was really cool to me.
+        </p>
+        <div class="flower-holder-c parallaxing" data-depth=".01">
+          <div class="audio-flower-1">
+            <a id="zach-writing-demo" class="audio" alt="When she was mine realization audio" href="media/WHEN_SHE_WAS_MINE_REALIZATION.mp3">
+              <img class="audio-wave" src="images/nav/audiowave_icon.svg" alt="audio wave">
+              <img class="flower-img" src="images/flowers/flower1.png" alt="flower">
+              <div class="words">Zach while <br>writing the demo</div>
+            </a>
+          </div>
+        </div>
+        <div class="bg"></div>
+    </div></section>
+
+    <section id="never-knew-a-heart-could-break-itself" class="no-padding-top">
+      <div class="content">
+        <img class="rotate-5 parallaxing" data-depth=".5" data-size="275/275" src="images/nnahcbi/Zach_NeverKnew_cover.jpg" alt="never knew a heart could break itself album cover" style="height: 769.148px;">
+        <img class="centered-title parallaxing" data-depth=".4" src="images/titles/neverknewaheart.svg" alt="never knew a heart could break itself">
+        <p class="parallaxing" data-depth=".35">This song describes a reality where I break up with someone – feeling that it’s time for both of us to “move on” – but I slowly regret my decision while she genuinely has moved on, leaving me feeling incredibly stuck. In this reality, I haven’t done any moving on while she undeniably has. “But I can’t take the photos of us off the shelf” shows that I clearly can’t get past this relationship, yet I still don’t want to selfishly intervene in her life and mess up anything good going on for her. Those photos and memories are all that I have left.</p>
+        <div class="play-btn-over-img parallaxing" data-depth=".3">
+          <a id="official-video-nkahcbi" target="_blank" alt="never knew a heart could break itself offical video" href="https://www.youtube.com/watch?v=fcJojbKYvMo">
+            <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+            <img class="rotate5" src="images/nnahcbi/Zach-VSC5.jpg" data-size="275/155" alt="never knew a heart could break itself play video" style="height: 623.382px; width: 1106px;">
+          </a>
+        </div>
+        <div class="flower-holder-d parallaxing" data-depth=".32">
+          <div class="audio-flower-1">
+            <a id="special-to-zach" class="audio" alt="Never knew a heart could break itself tour story audio" href="media/tour_story.mp3">
+              <img class="audio-wave" src="images/nav/audiowave_icon.svg" alt="play button">
+              <img class="flower-img" src="images/flowers/flower2.png" alt="flower">
+              <div class="words">Hear why the<br>song is particularly<br>special to Zach</div>
+            </a>
+          </div>
+          <div class="audio-flower-2">
+            <a id="watch-nkahcbi-tour" alt="Never knew a heart could break itself tour video" target="_blank" href="https://www.youtube.com/watch?v=osLP8Zpbg_Q&amp;t=199s&amp;ab_channel=ZachHood">
+              <img class="play-btn" src="images/nav/videoplay_icon.svg" alt="play button">
+              <img class="flower-img" src="images/flowers/flower3.png" alt="flower">
+              <div class="words">NKAHCBI on tour</div>
+            </a>
+          </div>
+        </div>
+        <img class="rotate-15 parallaxing" data-depth=".3" data-size="275/155" src="images/nnahcbi/Acoustic-VSC3.jpg" alt="Zach playing acoustic guitar" style="height: 623.382px; width: 1106px;">
+      </div>
+      <div class="bg"></div>
+    </section>
+
+    <section id="daphne" class="no-padding-top">
+      <div class="content">
+        <img class="rotate5 parallaxing" data-depth="0" data-size="275/155" src="images/daphne/Daphne_friends.jpg" alt="Zach and friends in car" style="height: 623.382px; width: 1106px;">
+        <img class="title parallaxing" data-depth=".31" src="images/titles/daphne.svg" alt="never knew a heart could break itself">
+        <p class="parallaxing" data-depth=".28">This song is my baby. I started working on it about a year ago when I was having a hard time. I had just moved across the country to follow a dream and make a name for myself. I’m not going to lie, it was very very hard at first and pretty much still is. One of the things I’ve tried very hard to do since I’ve been in LA is strive to stay true to myself and true to where I come from. My safe place is my hometown and the people that live there, and that’s still where my heart is. The truth is that I’m trying pretty hard to stay focused out here in LA, but I miss everything about my small, amazing city which is DAPHNE, Alabama.</p>
+        <img class="rotate-5 parallaxing" data-depth=".15" data-size="275/367" src="images/daphne/IMG_0342_darker.jpg" alt="Zach and friends on beach" style="height: 1106px; width: 828.747px;">
+      </div>
+      <div class="bg"></div>
+    </section>
+
+    <section id="number-one-fan" class="no-padding-top no-padding-bottom">
+      <div class="content">
+        <div class="overlapping-imgs parallaxing" data-depth="0" style="height: 1376px;">
+          <img class="rotate5" src="images/nof/IMG_0837.jpg" alt="Zach with mother and brother on chair">
+          <img class="rotate-5" src="images/nof/IMG_3461.jpg" alt="Zach with mother at theme park" style="top: 588px;">
+        </div>
+        <img class="title parallaxing" data-depth=".02" src="images/titles/numberonefan.svg" alt="number one fan">
+        <p class="large-bottom-padding parallaxing" data-depth="0">This song means everything to me. Growing up was not very easy for my family and I. My parents got a divorce when I was 8 years old, and while I didn’t know it then, my life would change in the best way possible. It was just my mom, my brother and I. We were moving from house to house, changing schools and struggling. You’d think that I would notice these things as a red flag as a child, but I didn’t. The only reason I didn’t was because of my mom. She stood there with a smile on her face 24/7 caring for my brother and I. She’d do anything she could do to provide for us. If there wasn’t enough food she would ALWAYS let us eat first. If we didn’t have the cool clothes that we saw other kids have YOU BET YOUR A** she would scrape up the money to get us those clothes. I could go ON AND ON about the things she has done for our family, but I’ll just leave it at this: after everything we’ve been through, she has always been in my corner cheering me on with ANYTHING I do. I could NEVER repay her for what she has done for me. I will forever be in debt to her unconditional love. She’s my “number one fan” &amp; this song is for her. I love you mom!
+        </p>
+        <footer>
+          <p>“Bringing a refreshing twist to the pop realm, Zach Hood is most definitely one to keep on your radar.”</p>
+          <img class="logo" src="images/footer/OnesToWatch-logo.svg" alt="ones to watch logo">
+          <p>“[Hood] has a long and exciting career ahead of him. He is truly smiling wide as he continues to perfect his craft.”</p>
+          <img class="logo" src="images/footer/EUPHORIA-white.png" alt="euphoria logo">
+          <p>“Perhaps even more impressive than the natural R&amp;B croon that Zach Hood flaunts… is his attention to detail… Hood pulls the listener into his own journey and the relationship that ended before it could truly blossom, turning into a straight-to-voicemail reply into affecting drama.”</p>
+          <img class="logo" src="images/footer/BILLBOARD-Logo.svg" alt="billboard logo">
+          <div class="nav-bottom">
+            <div class="nav-bottom-icons">
+              <div class="left"><img src="images/nav/Arista_logo_white.svg" alt="Arista logo"></div>
+              <div class="right">
+                <a target="_blank" href="https://www.instagram.com/zachary.hood/?hl=en"><img src="images/nav/instagram.svg" alt="instagram"></a>
+                <a target="_blank" href="https://www.facebook.com/ZacharyHoodMusic/"><img src="images/nav/facebook.svg" alt="facebook"></a>
+              </div>
+            </div>
+            <nav class="small">
+              <a target="_blank " href="https://www.sonymusic.com/feedback/">Send Us Feedback</a> |
+              <a target="_blank " href="https://www.sonymusic.com/privacy-policy/">Privacy Policy</a> | <a target="_blank" href="https://www.sonymusic.com/privacy-policy/#your-california-privacy-rights">Your California Privacy Rights</a> |
+              <a target="_blank " href="https://www.sonymusic.com/terms-and-conditions/">Terms And Conditions</a> |
+              <a target="_blank " href="https://www.sonymusic.com/how-we-use-your-data/">How We Use Your Data</a> |
+              <a target="_blank " href="https://www.sonymusic.com/ccpa-contact-form/">Do Not Sell My Information</a>
+            </nav>
+            <small>
+              © 2022 Sony Music Entertainment. All rights reserved.
+            </small>
+          </div>
+        <div class="bg"></div>
+      </footer>
+    </div>
+    </section>
+
+    <script id="fulljs" src="js/script.js"></script>
+  
+
+
+<script type="text/javascript" id="" src="https://tools.sonymusiccreative.com/sme_privacy/sme-privacy.min.js"></script>
+<script type="text/javascript" id="">SME_PRIVACY.separator=" | ";SME_PRIVACY.separator_position="before";SME_PRIVACY.init();</script></body></html>

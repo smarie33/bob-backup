@@ -1,0 +1,27 @@
+$primary: #ffffff;
+
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+//MIXINS//
+@mixin responsive($breakpoint) {
+  @if($breakpoint == xxlarge)  {
+    @media (min-width: $xxl) { @content };
+  }
+  @if($breakpoint == xlarge)  {
+    @media (min-width: $xl) { @content };
+  }
+  @if($breakpoint == large)  {
+    @media (min-width: $lg) { @content };
+  }
+  @if($breakpoint == medium)  {
+    @media (min-width: $md) { @content };
+  }
+  @if($breakpoint == small)  {
+    @media (min-width: $sm) { @content };
+  }
+}

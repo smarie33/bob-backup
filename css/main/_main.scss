@@ -1,0 +1,916 @@
+html{
+  overflow-x: hidden;
+  overflow:auto;
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+  &.no-scroll{
+    overflow: hidden;
+  }
+}
+
+body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: 'ArialNarrowOSRegular';
+  font-style: 'Normal';
+  font-stretch: 'Condensed';
+  font-weight: 400;
+  font-style: normal;
+  overflow-x: hidden;
+  font-size: 18px;
+  @include responsive(large){
+    font-size: 25px;
+  }
+  color: $primary;
+  &.no-scroll{
+    overflow: hidden;
+  }
+}
+
+.wrapper {
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-weight: 800;
+  font-style: normal;
+}
+
+.hide{opacity: 0;}
+
+nav{
+  &:not(.small){
+    background: #00492b url('../images/nav/NAV_background_wr.jpg') no-repeat right top;
+    background-size: auto 100%;
+    position: fixed;
+    z-index: 1000;
+    width:100%;
+    height:100%;
+    padding: 100px 0 0 0;
+    display: none;
+    &.show{
+      display: block;
+    }
+    a{
+      padding: 5px 0;
+    }
+    .tableofcontents{
+      margin-bottom: 30px;
+      width: 65%;
+      @include responsive(large){
+        width: 50%;
+      }
+    }
+  }
+  ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li{
+      padding:0 0 20px 0;
+      &:last-of-type{
+        padding: 0;
+      }
+    }
+  }
+  .flower{
+    img{
+      width:20%;
+      height: auto;
+      right: 25px;
+      position: absolute;
+    }
+  }
+  .nav-bottom{
+    position: absolute;
+    width: 100%;
+    padding: 0 100px;
+    bottom: 122px;
+    @include responsive(large){
+      bottom: 130px;
+    }
+    .small{
+      padding: 15px 0 5px 0;
+      @include responsive(large){
+      padding: 20px 0 10px 0;
+      }
+    }
+  }
+  .nav-bottom-icons{
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 100px);
+    img{
+      @include responsive(large){
+        height: 30px;
+        width: auto;
+      }
+    }
+    a:nth-of-type(2){
+      padding: 0 10px;
+    }
+  }
+  nav{
+    a{
+      display: inline-block;
+    }
+  }
+  ul, .nav-bottom, .tableofcontents{
+    padding: 0 50px 0 50px
+  }
+}
+
+a{
+  color:$primary;
+  text-decoration: none;
+  &:hover{
+    color:$primary;
+  }
+}
+
+header{
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 2000;
+  button{
+    display: none;
+    @include responsive(large){
+      display: block
+    }
+  }
+  .mobile-button{
+    display: block;
+    cursor: pointer;
+    @include responsive(large){
+      display: none;
+    }
+    .burger{
+      display: block;
+    }
+    .x{
+      display: none;
+    }
+    &.open{
+      .burger{
+        display: none;
+      }
+      .x{
+        display: block;
+      }
+    }
+  }
+  .mobile-button, button, a{
+    margin: 10%;
+    @include responsive(large){
+      margin: 100px;
+    }
+  }
+  a{
+    z-index: 500;
+  }
+  img{
+    width: 50px;
+  }
+  button{
+    background-color: transparent;
+    border: none;
+    .hamburger-box{
+      width: 50px;
+      height: 50px;
+    }
+    .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after{
+      background-color: $primary;
+      width: 50px;
+      height: 5px;
+      display: block;
+    }
+    .hamburger-inner:before{
+      top: -15px;
+    }
+    .hamburger-inner:after{
+      bottom: -15px;
+    }
+  }
+}
+
+small, .small{
+  font-size: 8px;
+  text-align: center;
+  width: calc(100% - 100px);
+  display: block;
+  @include responsive(large){
+    font-size: 14px;
+  }
+}
+
+.arial-black{
+  font-family: 'ArialBlack';
+  font-style: 'Normal';
+  font-streth: 'Normal';
+  text-align: center;
+}
+
+section{
+  padding: 100px 50px 100px 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  @include responsive(large){
+    padding: 100px 100px 100px 100px;
+  }
+  img:not(.flower-img, .play-btn, .audio-wave, .logo, .bgmoveimage, .title, .blossom){
+    padding: 30px 0;
+    width: calc(100% - 100px);
+    @include responsive(large){
+      width: calc(65% - 200px);
+      margin: auto;
+      padding: 30px 15% 30px 0;
+    }
+    @include responsive(xxlarge){
+      padding: 30px 0 30px 15%;
+    }
+    &.centered-title{
+      @include responsive(large){
+        width:60%;
+        padding-left: 12%;
+      }
+    }
+    &.title{
+      @include responsive(large){
+        padding: 30px 15% 30px 100px;
+      }
+      @include responsive(xxlarge){
+        padding:0;
+        margin: 25px 0 25px 10%;
+      }
+    }
+  }
+}
+
+p{
+  text-align: justify;
+  width: calc(100% - 100px);
+  z-index: 50;
+  position: relative;
+  @include responsive(large){
+    width: calc(80% - 200px);
+    margin: 25px 0 25px 10%;
+  }
+}
+
+.title{
+  width: 60%;
+  height: auto;
+  padding-bottom: 0;
+  @include responsive(large){
+    width: calc(60% - 200px);
+    margin: 25px 0 25px 10%;
+  }
+}
+
+
+img:not(.title, .centered-title, .logo, .menu-play-icon, .play-btn, .blossom, .x, .burger){
+  filter: drop-shadow(20px 20px 4px rgba(0, 0, 0, 0.5));
+}
+
+#opening{
+  height: 845px;
+  align-content: center;
+  padding: 120px 0 75px 0;
+  position: fixed;
+  z-index: 0;
+  background: #00492b url('../images/bg/home_bkgd_vert.jpg') no-repeat center top;
+  background-size: auto 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  @include responsive(xlarge){
+    background: #00492b url('../images/bg/home_bkgd_horizon.jpg') no-repeat center -200px;
+  }
+  div{
+    font-size: 20px;
+    margin-top: -250px;
+    @include responsive(medium){
+      margin-top: -350px;
+    }
+    @include responsive(large){
+      font-size: 40px;
+      position: fixed;
+      bottom: 170px;
+    }
+    @include responsive(xlarge){
+      position: fixed;
+      bottom: 222px;
+    }
+    @include responsive(xxlarge){
+      bottom: 150px;
+    }
+  }
+  img{
+    width: 100%;
+    margin-top: -15px;
+    @include responsive(large){
+      width: 80%;
+      position: fixed;
+      bottom: 86px;
+      margin-left: 8%;
+    }
+    @include responsive(xlarge){
+      bottom: 120px;
+    }
+    @include responsive(xxlarge){
+      bottom: 0;
+    }
+  }
+}
+
+@keyframes moveUp {
+	100% {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+.bgmove{
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  img{
+    width: auto;
+    height: 700px;
+    padding: 0;
+    margin-left: -100px;
+    top: 0;
+    padding: 0;
+    @include responsive(large){
+      width: calc(100% + 300px) !important;
+      height: auto;
+    }
+  }
+}
+
+.overbg{
+  position: relative;
+  z-index: 10;
+}
+
+.content{
+  position: relative;
+  z-index: 5;
+}
+
+#dedications{
+  background: #00492b url('../images/bg/dedications_bkgd.jpg') no-repeat center top;
+  background-size: auto 100%;
+  background-attachment: fixed;
+  z-index: 10;
+  @include responsive(large){
+    background-size: cover;
+  }
+  .title{
+    width: 45%;
+    @include responsive(large){
+      margin-left: 25%;
+      width: 30%;
+    }
+  }
+  p{
+    width: calc(100% - 100px);
+    @include responsive(large){
+      width: calc(80% - 200px);
+      margin: 25px 0 25px 10%;
+    }
+  }
+}
+
+.content{position: relative; z-index: 5}
+.bg{
+  width: calc(100% + 50px);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: absolute;
+  background-size: cover;
+  background-attachment: inherit;
+  position: absolute;
+  top:0;
+  left: 0;
+  margin-top: -100px;
+  margin-left: -100px;
+  z-index: -1;
+  padding-bottom: 170px;
+}
+
+#i-aint-rich-girl{
+  //background: #382d7b url('../images/bg/RichGirl_background_web.jpg') no-repeat center top;
+  background-size: auto 100%;
+  background-attachment: fixed;
+  @supports (-webkit-touch-callout: inherit) {
+    background-attachment: scroll;
+  }
+  padding-bottom: 1200px;
+  @include responsive(medium){
+    background-size: cover;
+    padding-bottom: 1800px;
+  }
+  @include responsive(xxlarge){
+    padding-bottom: 2500px;
+  }
+  .bg{
+      background-image: url('../images/bg/RichGirl_background_web.jpg');
+      background-color: #382d7b;
+      background-size: cover;
+  }
+  .rotate-15{
+    padding: 100px 100px 200px 0;
+    @include responsive(large){
+      padding: 100px 200px 200px 0;
+      width: calc(100% - 200px);
+    }
+  }
+  .rotate-5{
+    padding: 0;
+  }
+  .play-btn-over-img a .play-btn{
+    @include responsive(xxlarge){
+      margin-right: 20%;
+    }
+  }
+}
+
+#lonely-isnt-the-word-for-this{
+  .bg{
+      background-image: url('../images/bg/lonely_bkgd.jpg');
+      background-color: #604f7c;
+      margin-top: 0;
+      background-size: cover;
+  }
+  padding-bottom: 500px;
+  @include responsive(medium){
+    background-size: cover;
+    padding-bottom: 1000px;
+  }
+  @include responsive(xxlarge){
+    padding-bottom: 1500px;
+  }
+  .play-btn-over-img a .play-btn{
+    @include responsive(large){
+      top: 35%;
+      left: 30%;
+    }
+    @include responsive(xxlarge){
+      top: 35%;
+      left: 45%;
+    }
+  }
+}
+
+#when-she-was-mine{
+//  background: #df39b2 url('../images/bg/sky.jpg') no-repeat center top;
+  .bg{
+      background-image: url('../images/bg/sky.jpg');
+      background-color: #df39b2;
+      background-size: cover;
+  }
+  @include responsive(large){
+    background-size: cover;
+  }
+  .girlfriend-pic, .rotate-15{
+    margin-bottom: 150px;
+  }
+}
+
+#never-knew-a-heart-could-break-itself{
+  .bg{
+      background-image: url('../images/bg/NeverKnew_bkgd.jpg');
+      background-color: #df39b2;
+      margin-top: 0;
+      background-size: cover;
+  }
+  padding-bottom: 800px;
+  @include responsive(medium){
+    background-size: cover;
+    padding-bottom: 1200px;
+  }
+  @include responsive(xxlarge){
+    padding-bottom: 2000px;
+  }
+  .play-btn-over-img a{
+    .play-btn{
+      top: 50%;
+      margin-right: 15%;
+      @include responsive(large){
+        top: 40%;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+#daphne{
+//  background: #7457a9 url('../images/bg/shutterstock_568583797.jpg') no-repeat center top;
+  .bg{
+      background-image: url('../images/bg/shutterstock_568583797.jpg');
+      background-color: #7457a9;
+      margin-top: 0;
+      background-size: cover;
+  }
+  // @supports (-webkit-touch-callout: inherit) {
+  //   background-attachment: scroll;
+  // }
+  @include responsive(large){
+    background-size: cover;
+  }
+  .title{
+    width: 35%;
+  }
+}
+
+#number-one-fan{
+  .bg{
+       background-image: url('../images/bg/numeronefan.jpg');
+       background-color: #1b5c56;
+       margin-top: 0;
+       background-size: cover;
+  }
+  @include responsive(large){
+    background-size: cover;
+  }
+}
+
+.no-padding-top{
+  padding-top: 0 !important;
+}
+
+.no-padding-bottom{
+  padding-bottom: 50px !important;
+}
+
+.large-bottom-padding{
+  padding-bottom: 100px;
+}
+
+footer{
+  display: flex;
+  flex-direction: column;
+  p{
+    text-align: center;
+  }
+  .logo{
+    width:25%;
+    height: auto;
+    text-align: center;
+    margin: auto;
+    padding-right: 100px;
+    @include responsive(large){
+      padding-right: 200px;
+    }
+  }
+  .nav-bottom{
+      padding-top: 250px;
+      width: calc(100% - 100px);
+      @include responsive(large){
+        width: calc(100% - 200px);
+      }
+    .small{
+      padding: 30px 0 15px 0;
+    }
+  }
+  .nav-bottom-icons{
+    display: flex;
+    justify-content: space-between;
+    @include responsive(large){
+      width: calc(80% - 100px);
+      margin: auto;
+    }
+    img{
+      padding: 0;
+      height: 20px;
+      width: auto;
+    }
+    a:nth-of-type(2){
+      padding: 0 10px;
+    }
+  }
+  .small, small{
+    width: 100%;
+  }
+}
+
+.floating {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }
+}
+
+.rotate15{
+  transform: rotate(15deg);
+  padding: 35px 50px 35px 0;
+  width: calc(100% - 100px);
+  @include responsive(large){
+    padding: 200px 150px 200px 0;
+    width: calc(65% - 200px);
+    margin: auto;
+  }
+  @include responsive(xxlarge){
+    padding: 200px 0 200px 150px;
+  }
+}
+
+.rotate-15{
+  transform: rotate(-15deg);
+  padding: 35px 50px 35px 0;
+  width: calc(100% - 100px);
+  @include responsive(large){
+    padding: 200px 150px 200px 0;
+    width: calc(65% - 200px);
+    margin: auto;
+  }
+}
+
+.rotate5{
+  transform: rotate(5deg);
+  padding: 35px 50px 35px 0;
+  width: calc(100% - 100px);
+  @include responsive(large){
+    padding: 200px 150px 200px 0;
+    width: calc(65% - 200px);
+    margin: auto;
+  }
+}
+
+.rotate-5{
+  transform: rotate(-5deg);
+  padding: 50px 100px 100px 0;
+  width: calc(100% - 100px);
+  @include responsive(large){
+    padding: 200px 150px 200px 0;
+    width: calc(65% - 200px);
+    margin: auto;
+  }
+}
+
+.flower-holder, .flower-holder-b, .flower-holder-c, .flower-holder-d{
+  position: relative;
+  z-index: 5;
+  @include responsive(large){
+    width:70%;
+    margin:auto;
+  }
+}
+
+.flower-holder-d{
+  .audio-flower-1{
+    position: relative;
+    left: 0;
+    .audio-wave{
+      top: 31%;
+      margin-left: 41%;
+      @include responsive(xxlarge){
+        top: 28%;
+      }
+    }
+  }
+  .audio-flower-2{
+    position: relative;
+    padding-top: 0;
+    margin-bottom: 60px;
+    margin-left: 20%;
+    left: 0;
+    .play-btn{
+      margin-left: 41%;
+      top: 44%;
+    }
+  }
+}
+
+.flower-holder-c{
+  width: calc(100% - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  @include responsive(large){
+    margin-left: 0;
+  }
+  .audio-flower-1{
+    position: relative;
+    left: 0;
+    .audio-wave{
+      margin-left: -10%;
+      top: 30%;
+      @include responsive(large){
+        top: 31%;
+      }
+    }
+  }
+  .flower-img{
+    position: relative;
+  }
+}
+
+.audio-flower-1{
+  left: -25px;
+  .audio-wave{
+    top: 36%;
+    @include responsive(large){
+      top: 39%;
+    }
+    margin-left: 37%;
+    }
+}
+
+.audio-flower-2{
+  right: 15%;
+  top: 70%;
+  .audio-wave{
+    top: 34%;
+    @include responsive(large){
+      top: 39%;
+    }
+    margin-left: 41%;
+  }
+}
+
+.audio-flower-1, .audio-flower-2{
+  width: 54%;
+  height: auto;
+  position: absolute;
+  @include responsive(large){
+    width:45%;
+  }
+  a{
+    display: block;
+  }
+  .audio-wave,.play-btn{
+    z-index: 20;
+    position: absolute;
+  }
+  .audio-wave{
+    width: 20%;
+  }
+  .play-btn{
+    width: 15%;
+    top: 38%;
+    margin-left: 44%;
+    @include responsive(large){
+      top: 40%;
+    }
+    @include responsive(xxlarge){
+      top: 41%;
+    }
+  }
+  .flower-img{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+  }
+  .words{
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.flower-holder-b{
+  padding-bottom: 50px;
+  .audio-flower-1{
+    right: 15%;
+    left: auto;
+  }
+  .audio-flower-2{
+    left: -12%;
+    right: auto;
+  }
+}
+
+.play-btn-over-img a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .play-btn{
+    transition: all .5s linear;
+    position: absolute;
+    z-index: 10;
+    width: 10%;
+    opacity: .5;
+    margin-top: -10%;
+    margin-right: 25%;
+    &:hover{
+      opacity: 1;
+    }
+    @include responsive(large){
+      width: 5%;
+      margin-top: 3%;
+      margin-right: 0;
+    }
+    @include responsive(xxlarge){
+      margin-top: 1%;
+    }
+  }
+  .rotate15{
+    position: relative;
+    z-index: 0;
+    margin-right: 100px;
+    @include responsive(large){
+      margin-right: 20%;
+    }
+  }
+}
+
+.girlfriend-pic{
+  margin-right: 100px;
+  margin-left: 100px;
+  width: calc(100% - 200px);
+  padding: 100px 0 0 0;
+  @include responsive(large){
+    width: calc(65% - 200px);
+    margin: auto;
+  }
+  @include responsive(xxlarge){
+    padding: 100px 0 0 150px;
+  }
+}
+
+.overlapping-imgs{
+  position: relative;
+  padding-bottom: 30px;
+  @include responsive(large){
+    width: 70%;
+    margin: auto;
+  }
+  img{
+    position: absolute;
+    border: 25px solid $primary;
+    border: 10px solid #fff;
+    @include responsive(large){
+      border: 25px solid #fff;
+    }
+    width: 50%;
+  }
+  .rotate5{
+    z-index: 0;
+    padding: 0;
+    margin: 100px 25px 100px 0;
+    @include responsive(large){
+      margin: 200px 50px 200px -10px;
+    }
+  }
+  .rotate-5{
+    z-index: 10;
+    right: 0;
+    padding: 0;
+    margin: 100px 100px 0 0;
+    @include responsive(large){
+      margin: 200px 50px 200px 0;
+    }
+  }
+}
+
+@keyframes highlite {
+    0% { filter: drop-shadow(0 0 25px rgba(255, 255, 0, 0)) !important; }
+    50%  { filter: drop-shadow(0 0 25px rgba(255, 255, 0, 1)) !important; }
+    100%   { filter: drop-shadow(0 0 25px rgba(255, 255, 0, 0)) !important; }
+}
+
+
+.highlighted{
+  filter: drop-shadow(0 0 25px rgba(255, 255, 0, 1)) !important;
+  animation-name: highlite;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes bouncer {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }
+}
+
+.bouncing{
+  animation-name: bouncer;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-top: 5px;
+}
